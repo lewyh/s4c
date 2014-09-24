@@ -7,7 +7,7 @@ def get_rtmp(pid):
     html = urllib2.urlopen("http://beta.s4c.co.uk/clic/e_level2.shtml?"\
                            "programme_id={0}".format(pid))
     soup = bs(html.read())
-    player_script = soup('script')[-3]
+    player_script = soup('script')[-1]
     fn = player_script.contents[0].split('file:')[1].split("\"")[1]
     url = ("rtsp://ec2-46-51-181-116.eu-west-1.compute.amazonaws.com/"\
             "httpl/_definst_/mp4:amazons3/bsmvid/{0}.mp4".format(fn))
@@ -79,7 +79,6 @@ class show():
         self.eptitles = info['eptitles']
         for pid in self.pids:
             self.episodes[pid] = episode(pid)
-        
 
 d = {}
 html = urllib2.urlopen('http://beta.s4c.co.uk/clic/e_a2z.shtml?l=A-Z')
